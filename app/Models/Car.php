@@ -9,4 +9,10 @@ class Car extends Model
 {
     /** @use HasFactory<\Database\Factories\CarFactory> */
     use HasFactory;
+
+    protected $fillable = ['make', 'model', 'year'];
+
+    public function rentals(){
+        return $this->hasMany(Rental::class);
+    }
 }
