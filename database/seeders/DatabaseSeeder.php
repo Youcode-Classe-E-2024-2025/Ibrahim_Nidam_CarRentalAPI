@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Car;
+use App\Models\Payment;
+use App\Models\Rental;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Crée des voitures
+        Car::factory(15)->create();
+
+        // Crée des locations
+        Rental::factory(20)->create();
     }
 }
