@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Car;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,15 @@ class RentalFactory extends Factory
      */
     public function definition(): array
     {
+        $startDate = $this->faker->dateTimeBetween('-1 years', 'now');
+        $returnDate = $this->faker->dateTimeBetween($startDate, 'now');
+
         return [
-            //
+            'user_id'     => User::factory(),
+            'car_id'      => Car::factory(),
+            'amount'      => $this->faker->randomFloat(2, 50, 500), // Montant entre 50 et 500
+            'start_date' => $startDate,
+            'return_date' => $returnDate,
         ];
     }
 }
