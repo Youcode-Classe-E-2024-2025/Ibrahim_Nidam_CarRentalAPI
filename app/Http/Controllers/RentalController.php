@@ -93,7 +93,7 @@ class RentalController extends Controller
                 'rental_id' => $rental->id,
                 'amount'    => $amount,
             ]);
-
+            // return redirect($session->url);
             return response()->json([
                 'checkout_url' => $session->url,
             ]);
@@ -112,7 +112,7 @@ class RentalController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         try {
-            $session = \Stripe\Checkout\Session::retrieve($sessionId);
+            $session = StripeSession::retrieve($sessionId);
             if ($session->payment_status !== 'paid') {
                 return response()->json(['error' => 'Payment not completed'], 400);
             }
